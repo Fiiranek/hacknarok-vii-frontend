@@ -4,6 +4,7 @@ import { List } from "react-native-paper";
 // import qr_code from "../../../assets/qr_code.png";
 import { useTheme } from "react-native-paper";
 import { DataTable } from "react-native-paper";
+import { capitalize } from "../../utils";
 const Profile = () => {
   const theme = useTheme();
   const [expanded, setExpanded] = useState(true);
@@ -70,8 +71,11 @@ const Profile = () => {
 
         {transactions.map((transaction, index) => (
           <List.Accordion
+            style={{
+              backgroundColor: theme.colors.primaryBlue,
+            }}
             key={"transaction" + index}
-            title={transaction.type.toUpperCase()}
+            title={capitalize(transaction.type)}
             //   description={"Hour: 8:37 PM\nLocation: H&M St. John avenue"}
             description={
               <View>

@@ -8,4 +8,7 @@ export const getLastMonths = (n = 3) => {
     months.reverse()
     return months;
 }
-console.log(getLastMonths(3))
+
+export const capitalize = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}

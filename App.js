@@ -5,7 +5,7 @@ import { BottomNavigation } from "react-native-paper";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { Provider as PaperProvider, MD3LightTheme as DefaultTheme } from "react-native-paper";
 import Profile from "./src/screens/profile/Profile";
-//import Map from "./src/screens/map/Map";
+import Maps from "./src/screens/map/Maps";
 
 const theme = {
   ...DefaultTheme,
@@ -60,7 +60,8 @@ export default function App() {
 
   const renderScene = BottomNavigation.SceneMap({
     home: Home,
-    profile: Profile
+    profile: Profile,
+    maps: Maps
 
   });
 
