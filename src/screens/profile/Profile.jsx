@@ -1,6 +1,6 @@
 import { View, Text, Image, Dimensions, ScrollView } from "react-native";
 import React, { useState } from "react";
-import { List } from "react-native-paper";
+import { IconButton, List } from "react-native-paper";
 import avatar from "../../../assets/avatar.png";
 import medal from "../../../assets/medal.png";
 import levelUp from "../../../assets/level-up.png";
@@ -240,18 +240,50 @@ const Profile = () => {
           <Text style={theme.text.h2}>Levels</Text>
         </View>
       </View>
+
+      {transactions.map((tx, index) => {
+        let deposit = tx.type === "deposit";
+        return (
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              backgroundColor: "white",
+              borderRadius: 20,
+              padding: 10,
+              marginVertical: 5,
+              width: "95%",
+            }}
+          >
+            <IconButton icon={deposit ? "shirt" : "add-circle"} size={30} />
+            <View>
+              <Text style={theme.text.h2}>
+                {capitalize(tx.type).replace("-", " ")}
+              </Text>
+              <Text style={theme.text.h4}>Hour: {tx.time}</Text>
+              <Text style={theme.text.h4}>Location: {tx.location}</Text>
+            </View>
+          </View>
+        );
+      })}
+
       <List.Section
         style={{
           width: Dimensions.get("window").width * 0.95,
+          backgroundColor: "#f4f4f4",
         }}
-        title="Commitment to saving world <3"
+        titleStyle={{
+          backgroundColor: "#f4f4f4",
+        }}
+        // title="Commitment to saving world <3"
       >
         {transactions.map((tx, index) => {
           let deposit = tx.type === "deposit";
           return (
             <List.Accordion
               style={{
-                backgroundColor: HEXtoRGB(theme.colors.primaryLightGreen, 0.2),
+                // backgroundColor: HEXtoRGB(theme.colors.primaryLightGreen, 0.2),
+                backgroundColor: "white",
                 borderRadius: 20,
                 marginVertical: 5,
               }}
