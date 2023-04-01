@@ -1,10 +1,11 @@
-import { useState } from 'react';
-import Home from './src/screens/home/Home';
-import { StyleSheet, Text, View } from 'react-native';
-import { BottomNavigation, } from 'react-native-paper';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import { Provider as PaperProvider, MD3LightTheme as DefaultTheme, } from 'react-native-paper';
-import Profile from './src/screens/profile/Profile';
+import { useState } from "react";
+import Home from "./src/screens/home/Home";
+import { StyleSheet, Text, View } from "react-native";
+import { BottomNavigation } from "react-native-paper";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { Provider as PaperProvider, MD3LightTheme as DefaultTheme } from "react-native-paper";
+import Profile from "./src/screens/profile/Profile";
+//import Map from "./src/screens/map/Map";
 
 const theme = {
   ...DefaultTheme,
@@ -45,7 +46,6 @@ const theme = {
     }
   }
 };
-
 
 export default function App() {
   const [index, setIndex] = useState(0)
