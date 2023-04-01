@@ -9,6 +9,7 @@ import {
     Modal,
     configureFonts,
 } from 'react-native-paper';
+import QRCode from 'react-native-qrcode-svg';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import qrCode from './assets/qr_code.png';
@@ -162,6 +163,7 @@ export default function App() {
                         backgroundColor: 'white',
                         alignItems: 'center',
                         justifyContent: 'center',
+                        height: Dimensions.get('window').height * 0.3,
                         borderRadius: 20,
                         margin: 10,
                         padding: 10,
@@ -169,14 +171,7 @@ export default function App() {
                 >
                     <Text style={theme.text.h2}>MY CARD</Text>
                     <Text style={{ ...theme.text.h4, color: theme.colors.primaryGreen }}>Tom</Text>
-                    <Image
-                        style={{
-                            height: Dimensions.get('window').width * 0.8,
-                            width: Dimensions.get('window').width * 0.8,
-                            resizeMode: 'stretch',
-                        }}
-                        source={qrCode}
-                    />
+                    <QRCode size={150} value="8245-9810-4619" />
                     <Text style={{ ...theme.text.h4 }}>8245-9810-4619</Text>
                 </View>
             </Modal>
