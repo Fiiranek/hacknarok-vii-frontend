@@ -1,226 +1,195 @@
-import { useState } from "react";
-import Home from "./src/screens/home/Home";
-import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
-import { BottomNavigation, Provider as PaperProvider, MD3LightTheme as DefaultTheme, IconButton, Modal, configureFonts, } from "react-native-paper";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import { useState } from 'react';
+import Home from './src/screens/home/Home';
+import { Dimensions, Image, StyleSheet, Text, View } from 'react-native';
+import {
+    BottomNavigation,
+    Provider as PaperProvider,
+    MD3LightTheme as DefaultTheme,
+    IconButton,
+    Modal,
+    configureFonts,
+} from 'react-native-paper';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import qrCode from "./assets/qr_code.png";
-import Profile from "./src/screens/profile/Profile";
-import Maps from "./src/screens/map/Maps";
+import qrCode from './assets/qr_code.png';
+import Profile from './src/screens/profile/Profile';
+import Maps from './src/screens/map/Maps';
 import { Platform } from 'react-native';
-import { SafeAreaView } from "react-native-safe-area-context";
-import QRModal from "./src/components/qr-modal/QRModal";
+import { SafeAreaView } from 'react-native-safe-area-context';
+import QRModal from './src/components/qr-modal/QRModal';
 
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 
 const fontConfig = {
-  web: {
-    regular: {
-      fontFamily: 'Raleway-Regular',
-      fontWeight: 'regular',
+    default: {
+        regular: {
+            fontFamily: 'Raleway-Regular',
+            fontWeight: 'regular',
+        },
+        medium: {
+            fontFamily: 'Raleway-medium',
+            fontWeight: 'regular',
+        },
+        light: {
+            fontFamily: 'Raleway-light',
+            fontWeight: 'regular',
+        },
+        thin: {
+            fontFamily: 'Raleway-thin',
+            fontWeight: 'regular',
+        },
     },
-    medium: {
-      fontFamily: 'Raleway-medium',
-      fontWeight: 'regular',
-    },
-    light: {
-      fontFamily: 'Raleway-light',
-      fontWeight: 'regular',
-    },
-    thin: {
-      fontFamily: 'Raleway-thin',
-      fontWeight: 'regular',
-    },
-  },
-  ios: {
-    regular: {
-      fontFamily: 'Raleway',
-      fontWeight: 'regular',
-    },
-    medium: {
-      fontFamily: 'Raleway-medium',
-      fontWeight: 'regular',
-    },
-    light: {
-      fontFamily: 'Raleway-light',
-      fontWeight: 'regular',
-    },
-    thin: {
-      fontFamily: 'Raleway-thin',
-      fontWeight: 'regular',
-    },
-  },
-  android: {
-    regular: {
-      fontFamily: 'Raleway',
-      fontWeight: 'regular',
-    },
-    medium: {
-      fontFamily: 'Raleway-medium',
-      fontWeight: 'regular',
-    },
-    light: {
-      fontFamily: 'Raleway-light',
-      fontWeight: 'regular',
-    },
-    thin: {
-      fontFamily: 'Raleway-thin',
-      fontWeight: 'regular',
-    },
-  }
 };
+fontConfig.ios = fontConfig.default;
+fontConfig.android = fontConfig.default;
+fontConfig.web = fontConfig.default;
 
 const theme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    primaryBlack: "#1F2421",
-    primaryAqua: "#216869",
-    primaryBlue: "#1CB4E5",
-    primaryGreen: "#49A078",
-    primaryLightGreen: "#9CC5A1",
-    primaryPlatinium: "DCE1DE",
-  },
-  text: {
-
-    h1: {
-      ...DefaultTheme.text,
-      fontSize: 20,
-      fontWeight: 'bold'
+    ...DefaultTheme,
+    colors: {
+        ...DefaultTheme.colors,
+        primaryBlack: '#1F2421',
+        primaryAqua: '#216869',
+        primaryBlue: '#1CB4E5',
+        primaryGreen: '#49A078',
+        primaryLightGreen: '#9CC5A1',
+        primaryPlatinium: 'DCE1DE',
     },
-    h2: {
-      ...DefaultTheme.text,
-      fontSize: 18,
-      fontWeight: 'bold'
+    text: {
+        h1: {
+            ...DefaultTheme.text,
+            fontSize: 20,
+            fontWeight: 'bold',
+        },
+        h2: {
+            ...DefaultTheme.text,
+            fontSize: 18,
+            fontWeight: 'bold',
+        },
+        h3: {
+            ...DefaultTheme.text,
+            fontSize: 16,
+            fontWeight: 'bold',
+        },
+        h4: {
+            ...DefaultTheme.text,
+            fontSize: 14,
+            fontWeight: 'bold',
+        },
+        h5: {
+            ...DefaultTheme.text,
+            fontSize: 12,
+            fontWeight: 'bold',
+        },
+        h6: {
+            ...DefaultTheme.text,
+            fontSize: 10,
+        },
     },
-    h3: {
-      ...DefaultTheme.text,
-      fontSize: 16,
-      fontWeight: 'bold'
-    },
-    h4: {
-      ...DefaultTheme.text,
-      fontSize: 14,
-      fontWeight: 'bold'
-    },
-    h5: {
-      ...DefaultTheme.text,
-      fontSize: 12,
-      fontWeight: 'bold'
-    },
-    h6: {
-      ...DefaultTheme.text,
-      fontSize: 10
-    }
-  },
-  // fonts: configureFonts({
-  //   config: fontConfig, isV3: false
-  // })
+    fonts: configureFonts(fontConfig),
 };
 
 export default function App() {
-  const [showQRModal, setShowQRModal] = useState(0)
-  const [index, setIndex] = useState(0)
-  const [routes] = useState([
-    { key: 'home', title: 'Favorites', focusedIcon: 'home', unfocusedIcon: 'home-outline' },
-    { key: 'maps', title: 'Maps', focusedIcon: 'map', unfocusedIcon: 'map-outline' },
-    { key: 'scan', title: 'Scan', focusedIcon: 'qr-code', unfocusedIcon: 'qr-code-outline' },
+    const [showQRModal, setShowQRModal] = useState(0);
+    const [index, setIndex] = useState(0);
+    const [routes] = useState([
+        { key: 'home', title: 'Favorites', focusedIcon: 'home', unfocusedIcon: 'home-outline' },
+        { key: 'maps', title: 'Maps', focusedIcon: 'map', unfocusedIcon: 'map-outline' },
+        { key: 'scan', title: 'Scan', focusedIcon: 'qr-code', unfocusedIcon: 'qr-code-outline' },
 
-    { key: 'ranks', title: 'Ranks', focusedIcon: 'trophy', unfocusedIcon: 'trophy-outline' },
-    { key: 'profile', title: 'Profile', focusedIcon: 'person', unfocusedIcon: 'person-outline' },
-  ]);
+        { key: 'ranks', title: 'Ranks', focusedIcon: 'trophy', unfocusedIcon: 'trophy-outline' },
+        { key: 'profile', title: 'Profile', focusedIcon: 'person', unfocusedIcon: 'person-outline' },
+    ]);
 
-  const renderScene = BottomNavigation.SceneMap({
-    home: Home,
-    profile: Profile,
-    maps: Maps
+    const renderScene = BottomNavigation.SceneMap({
+        home: Home,
+        profile: Profile,
+        maps: Maps,
+    });
 
-  });
+    return (
+        // <SafeAreaView style={{
+        //   minHeight: '100%',
+        // }}>
+        <PaperProvider
+            theme={theme}
+            settings={{
+                icon: props => <Ionicons {...props} />,
+            }}
+        >
+            <View
+                style={{
+                    // backgroundColor: theme.colors.primaryLightGreen,
+                    height: 40,
+                    borderBottomRightRadius: 50,
+                    borderBottomLeftRadius: 50,
+                }}
+            ></View>
 
-  return (
-    // <SafeAreaView style={{
-    //   minHeight: '100%',
-    // }}>
-    <PaperProvider
+            {/* FLOATING ACTION BUTTON */}
+            <View
+                // iconColor={MD3Colors.error50}
 
-      theme={theme}
-      settings={{
+                style={{
+                    position: 'absolute',
+                    bottom: 100,
+                    right: 100,
+                    height: 50,
+                    width: 50,
+                }}
+            >
+                <Ionicons icon="qr-code" size={30} color={'red'} />
+            </View>
 
-        icon: props => <Ionicons {...props} />,
-      }}>
+            <BottomNavigation
+                navigationState={{ index, routes }}
+                onIndexChange={index => {
+                    if (index !== 2) setIndex(index);
+                    else setShowQRModal(!showQRModal);
+                }}
+                renderScene={renderScene}
+            />
 
-      <View style={{
-        // backgroundColor: theme.colors.primaryLightGreen,
-        height: 40,
-        borderBottomRightRadius: 50,
-        borderBottomLeftRadius: 50
-
-      }}>
-      </View>
-
-      {/* FLOATING ACTION BUTTON */}
-      <View
-
-        // iconColor={MD3Colors.error50}
-
-
-        style={{
-          position: 'absolute',
-          bottom: 100,
-          right: 100,
-          height: 50,
-          width: 50
-        }}><Ionicons icon="qr-code" size={30} color={"red"} /></View>
-
-
-      <BottomNavigation
-
-
-        navigationState={{ index, routes }}
-        onIndexChange={(index) => {
-          if (index !== 2) setIndex(index)
-          else setShowQRModal(!showQRModal)
-        }}
-        renderScene={renderScene}
-      />
-
-      <Modal
-        visible={showQRModal}
-        onDismiss={() => setShowQRModal(0)}
-      // contentContainerStyle={containerStyle}
-      >
-        <View style={{
-          display: "flex",
-          flexDirection: "column",
-          backgroundColor: "white",
-          alignItems: "center",
-          justifyContent: "center",
-          borderRadius: 20,
-          margin: 10,
-          padding: 10
-        }}>
-          <Text style={theme.text.h2}>MY CARD</Text>
-          <Text style={{ ...theme.text.h4, color: theme.colors.primaryGreen }}>Tom</Text>
-          <Image style={{
-            height: Dimensions.get('window').width * 0.8,
-            width: Dimensions.get('window').width * 0.8,
-            resizeMode: 'stretch'
-          }} source={qrCode} />
-          <Text style={{ ...theme.text.h4 }}>8245-9810-4619</Text>
-        </View>
-      </Modal>
-
-    </PaperProvider >
-    // </SafeAreaView>
-
-  );
+            <Modal
+                visible={showQRModal}
+                onDismiss={() => setShowQRModal(0)}
+                // contentContainerStyle={containerStyle}
+            >
+                <View
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        backgroundColor: 'white',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        borderRadius: 20,
+                        margin: 10,
+                        padding: 10,
+                    }}
+                >
+                    <Text style={theme.text.h2}>MY CARD</Text>
+                    <Text style={{ ...theme.text.h4, color: theme.colors.primaryGreen }}>Tom</Text>
+                    <Image
+                        style={{
+                            height: Dimensions.get('window').width * 0.8,
+                            width: Dimensions.get('window').width * 0.8,
+                            resizeMode: 'stretch',
+                        }}
+                        source={qrCode}
+                    />
+                    <Text style={{ ...theme.text.h4 }}>8245-9810-4619</Text>
+                </View>
+            </Modal>
+        </PaperProvider>
+        // </SafeAreaView>
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 });
