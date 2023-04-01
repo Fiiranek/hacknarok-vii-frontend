@@ -96,21 +96,21 @@ export default Maps = () => {
     // },
   ]);
 
-  const [region, setRegion] = useState({
-    latitude: 37.78825,
-    longitude: -122.4324,
-    latitudeDelta: 0.01,
-    longitudeDelta: 0.01,
-  });
-  const [errorMsg, setErrorMsg] = useState(null);
-  const mapRef = useRef(null);
-  useEffect(() => {
-    (async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        setErrorMsg("Permission to access location was denied");
-        return;
-      }
+    const [region, setRegion] = useState({
+        latitude: 51.9189046,
+        longitude: -19.1343786,
+        latitudeDelta: 0.01,
+        longitudeDelta: 0.01,
+    });
+    const [errorMsg, setErrorMsg] = useState(null);
+    const mapRef = useRef(null);
+    useEffect(() => {
+        (async () => {
+            let { status } = await Location.requestForegroundPermissionsAsync();
+            if (status !== 'granted') {
+                setErrorMsg('Permission to access location was denied');
+                return;
+            }
 
       let location = await Location.getCurrentPositionAsync({
         accuracy: Location.Accuracy.Lowest,
@@ -332,8 +332,8 @@ export default Maps = () => {
 };
 
 const styles = StyleSheet.create({
-  map: {
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
-  },
+    map: {
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height,
+    },
 });
