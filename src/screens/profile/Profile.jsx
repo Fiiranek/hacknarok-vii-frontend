@@ -1,10 +1,14 @@
-import { View, Text, Image, Dimensions } from "react-native";
+import { View, Text, Image, Dimensions, ScrollView } from "react-native";
 import React, { useState } from "react";
 import { List } from "react-native-paper";
-// import qr_code from "../../../assets/qr_code.png";
+import avatar from "../../../assets/avatar.png";
+import medal from "../../../assets/medal.png";
+import levelUp from "../../../assets/level-up.png";
 import { useTheme } from "react-native-paper";
-import { DataTable } from "react-native-paper";
-import { capitalize } from "../../utils";
+import { HEXtoRGB, capitalize } from "../../utils";
+import { ProgressBar } from "react-native-paper";
+import Chart from "../../components/chart/Chart";
+
 const Profile = () => {
   const theme = useTheme();
   const [expanded, setExpanded] = useState(true);
@@ -19,15 +23,58 @@ const Profile = () => {
       amount: 100,
       type: "deposit",
     },
+    {
+      id: 1,
+      date: "2021-01-01",
+      time: "8:37 PM",
+      location: "H&M St. John avenue",
+      amount: 100,
+      type: "pick-up",
+    },
+    {
+      id: 1,
+      date: "2021-01-01",
+      time: "8:37 PM",
+      location: "House av. Saint Paul",
+      amount: 300,
+      type: "deposit",
+    },
+    {
+      id: 1,
+      date: "2021-01-01",
+      time: "8:37 PM",
+      location: "House av. Saint Paul",
+      amount: 300,
+      type: "deposit",
+    },
+    {
+      id: 1,
+      date: "2021-01-01",
+      time: "8:37 PM",
+      location: "House av. Saint Paul",
+      amount: 300,
+      type: "deposit",
+    },
+    {
+      id: 1,
+      date: "2021-01-01",
+      time: "8:37 PM",
+      location: "House av. Saint Paul",
+      amount: 300,
+      type: "deposit",
+    },
   ]);
   return (
-    <View
+    <ScrollView
       style={{
+        backgroundColor: "#f4f4f4",
+        marginTop: 50,
         display: "flex",
         flexDirection: "column",
+      }}
+      contentContainerStyle={{
         justifyContent: "center",
         alignItems: "center",
-        minHeight: "100%",
       }}
     >
       <View
@@ -36,19 +83,162 @@ const Profile = () => {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
+          borderRadius: 20,
+          margin: 5,
+          backgroundColor: "white",
+          width: Dimensions.get("window").width * 0.95,
+          padding: 10,
         }}
       >
-        <Text style={theme.text.h1}>Hi Tom!</Text>
         <Image
           style={{
-            width: 200,
-            height: 200,
+            width: 100,
+            height: 100,
           }}
-          source={{
-            //   uri: qr_code,
-            uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/1200px-QR_code_for_mobile_English_Wikipedia.svg.png",
-          }}
+          source={avatar}
         />
+        <View
+          style={{
+            position: "relative",
+            top: -10,
+            backgroundColor: theme.colors.primaryLightGreen,
+            borderRadius: 50,
+            borderColor: "white",
+            borderWidth: 2,
+            paddingVertical: 5,
+            paddingHorizontal: 10,
+          }}
+        >
+          <Text
+            style={{
+              color: "white",
+            }}
+          >
+            Lvl. 8
+          </Text>
+        </View>
+        <Text style={theme.text.h2}>Hi Tom!</Text>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            width: Dimensions.get("window").width * 0.7,
+          }}
+        >
+          <ProgressBar
+            style={{
+              width: Dimensions.get("window").width * 0.7,
+              marginVertical: 10,
+              height: 20,
+              borderRadius: 100,
+            }}
+            progress={0.45}
+            color={theme.colors.primaryBlue}
+          />
+
+          <View
+            style={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <View
+              style={{
+                display: "flex",
+                alignItems: "center",
+                flexDirection: "row",
+              }}
+            >
+              <List.Icon icon="water" color={theme.colors.primaryBlue} />
+              <Text style={theme.text.h2}>45/100</Text>
+            </View>
+          </View>
+          <View
+            style={{
+              width: "90%",
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              position: "relative",
+              top: -54,
+            }}
+          >
+            <Text
+              style={{ ...theme.text.h5, color: "white", fontWeight: "bold" }}
+            >
+              8
+            </Text>
+            <Text style={{ ...theme.text.h5, fontWeight: "bold" }}>9</Text>
+          </View>
+        </View>
+      </View>
+      <View
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: 20,
+            margin: 5,
+            backgroundColor: "white",
+            width: (Dimensions.get("window").width * 0.95) / 2 - 5,
+            padding: 10,
+          }}
+        >
+          <Image
+            source={medal}
+            style={{ height: 64, width: 64, marginBottom: 10 }}
+          />
+          <Text style={theme.text.h2}>Badges</Text>
+        </View>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: 20,
+            margin: 5,
+            backgroundColor: "white",
+            width: (Dimensions.get("window").width * 0.95) / 2 - 5,
+            padding: 10,
+          }}
+        >
+          <Image
+            source={levelUp}
+            style={{ height: 64, width: 64, marginBottom: 10 }}
+          />
+          <Text style={theme.text.h2}>Levels</Text>
+        </View>
+      </View>
+
+      <View
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          borderRadius: 20,
+          margin: 5,
+          backgroundColor: "white",
+          width: Dimensions.get("window").width * 0.95,
+          padding: 10,
+        }}
+      >
+        <Chart />
       </View>
 
       <List.Section
@@ -57,59 +247,61 @@ const Profile = () => {
         }}
         title="Commitment to saving world <3"
       >
-        <List.Accordion
-          style={{
-            maxHeight: 200,
-          }}
-          title="Uncontrolled Accordion"
-          left={(props) => <List.Icon {...props} icon="folder" />}
-          //   expanded={false}
-        >
-          <List.Item title="First item" />
-          <List.Item title="Second item" />
-        </List.Accordion>
-
-        {transactions.map((transaction, index) => (
-          <List.Accordion
-            style={{
-              backgroundColor: theme.colors.primaryBlue,
-            }}
-            key={"transaction" + index}
-            title={capitalize(transaction.type)}
-            //   description={"Hour: 8:37 PM\nLocation: H&M St. John avenue"}
-            description={
-              <View>
-                <Text style={theme.text.h4}>Hour: 8:37 PM</Text>
-                <Text style={theme.text.h4}>Location: H&M St. John avenue</Text>
-              </View>
-            }
-            descriptionNumberOfLines={3}
-            left={(props) => <List.Icon {...props} icon="arrow-redo" />}
-            expanded={false}
-            right={(props) => (
-              <View
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                }}
-              >
-                <Text style={{ color: theme.colors.primaryBlue }}>+100 </Text>
-                <List.Icon
-                  {...props}
-                  icon="water"
-                  color={theme.colors.primaryBlue}
-                />
-              </View>
-            )}
-            //   onPress={handlePress}
-          >
-            <List.Item title="First item" />
-            <List.Item title="Second item" />
-          </List.Accordion>
-        ))}
+        {transactions.map((tx, index) => {
+          let deposit = tx.type === "deposit";
+          return (
+            <List.Accordion
+              style={{
+                backgroundColor: HEXtoRGB(theme.colors.primaryLightGreen, 0.2),
+                borderRadius: 20,
+                marginVertical: 5,
+              }}
+              key={"tx" + index}
+              title={capitalize(tx.type).replace("-", " ")}
+              //   description={"Hour: 8:37 PM\nLocation: H&M St. John avenue"}
+              description={
+                <View>
+                  <Text style={theme.text.h4}>Hour: {tx.time}</Text>
+                  <Text style={theme.text.h4}>Location: {tx.location}</Text>
+                </View>
+              }
+              descriptionNumberOfLines={3}
+              left={(props) => (
+                <List.Icon {...props} icon={deposit ? "shirt" : "add-circle"} />
+              )}
+              expanded={false}
+              right={(props) => (
+                <View
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                  }}
+                >
+                  <Text
+                    style={{
+                      color: deposit ? theme.colors.primaryBlue : theme.primary,
+                    }}
+                  >
+                    {deposit ? "+" : "-"}
+                    {tx.amount}
+                  </Text>
+                  <List.Icon
+                    {...props}
+                    icon="water"
+                    color={deposit ? theme.colors.primaryBlue : theme.primary}
+                  />
+                </View>
+              )}
+              //   onPress={handlePress}
+            >
+              {/* <List.Item title="First item" />
+              <List.Item title="Second item" /> */}
+            </List.Accordion>
+          );
+        })}
       </List.Section>
-    </View>
+    </ScrollView>
   );
 };
 

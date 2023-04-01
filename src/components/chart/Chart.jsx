@@ -9,40 +9,47 @@ import {
 import "react-native-svg";
 import { View, Text, Dimensions } from "react-native";
 import React from "react";
-import { getLastMonths } from "../../utils";
+import { getLastMonths, sum } from "../../utils";
 import { useTheme } from "react-native-paper";
 
 const Chart = () => {
   const theme = useTheme();
+  const data = [20, 35, 28];
   return (
     <View>
-      <Text style={{ textAlign: "center" }}>Bezier Line Chart</Text>
+      <Text style={{ ...theme.text.h2, textAlign: "center" }}>
+        {sum(data)} L of water saved in last 3 months!
+      </Text>
       <LineChart
+        // fromZero={true}
         data={{
           labels: getLastMonths(3),
           datasets: [
             {
-              data: [156, 120, 187],
+              data: data,
             },
           ],
         }}
-        width={Dimensions.get("window").width * 0.96} // from react-native
+        width={Dimensions.get("window").width * 0.8} // from react-native
         height={200}
-        yAxisLabel="L"
-        // yAxisSuffix="k"
+        // yAxisLabel="L"
+        yAxisSuffix=" L"
         // yAxisInterval={1} // optional, defaults to 1
-        yAxisInterval={100} // optional, defaults to 1
+        yAxisInterval={1} // optional, defaults to 1
         chartConfig={{
           //   backgroundColor: "#e26a00",
-          backgroundGradientFrom: theme.colors.primaryGreen,
-          backgroundGradientTo: theme.colors.primaryLightGreen,
+
+          backgroundGradientFrom: "white",
+          backgroundGradientTo: "white",
           decimalPlaces: 0, // optional, defaults to 2dp
-          color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+          color: (opacity = 1) => theme.colors.primaryBlue,
           //   color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-          labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+          labelColor: (opacity = 1) => "black",
+
           style: {
             borderRadius: 10,
           },
+
           propsForDots: {
             r: "6",
             strokeWidth: "2",
