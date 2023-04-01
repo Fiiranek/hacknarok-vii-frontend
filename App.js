@@ -12,6 +12,7 @@ const theme = {
     ...DefaultTheme.colors,
     primaryBlack: "#1F2421",
     primaryAqua: "#216869",
+    primaryBlue: "#1CB4E5",
     primaryGreen: "#49A078",
     primaryLightGreen: "#9CC5A1",
     primaryPlatinium: "DCE1DE",
@@ -24,7 +25,23 @@ const theme = {
     },
     h2: {
       ...DefaultTheme.text,
+      fontSize: 18
+    },
+    h3: {
+      ...DefaultTheme.text,
       fontSize: 16
+    },
+    h4: {
+      ...DefaultTheme.text,
+      fontSize: 14
+    },
+    h5: {
+      ...DefaultTheme.text,
+      fontSize: 12
+    },
+    h6: {
+      ...DefaultTheme.text,
+      fontSize: 10
     }
   }
 };
