@@ -3,9 +3,13 @@ import Home from "./src/screens/home/Home";
 import { StyleSheet, Text, View } from "react-native";
 import { BottomNavigation } from "react-native-paper";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { Provider as PaperProvider, MD3LightTheme as DefaultTheme } from "react-native-paper";
+import { Provider as PaperProvider, MD3LightTheme as DefaultTheme, Appbar } from "react-native-paper";
 import Profile from "./src/screens/profile/Profile";
 import Maps from "./src/screens/map/Maps";
+import { Platform } from 'react-native';
+import { SafeAreaView } from "react-native-safe-area-context";
+
+const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 
 const theme = {
   ...DefaultTheme,
@@ -22,23 +26,28 @@ const theme = {
 
     h1: {
       ...DefaultTheme.text,
-      fontSize: 20
+      fontSize: 20,
+      fontWeight: 'bold'
     },
     h2: {
       ...DefaultTheme.text,
-      fontSize: 18
+      fontSize: 18,
+      fontWeight: 'bold'
     },
     h3: {
       ...DefaultTheme.text,
-      fontSize: 16
+      fontSize: 16,
+      fontWeight: 'bold'
     },
     h4: {
       ...DefaultTheme.text,
-      fontSize: 14
+      fontSize: 14,
+      fontWeight: 'bold'
     },
     h5: {
       ...DefaultTheme.text,
-      fontSize: 12
+      fontSize: 12,
+      fontWeight: 'bold'
     },
     h6: {
       ...DefaultTheme.text,
@@ -66,10 +75,25 @@ export default function App() {
   });
 
   return (
-    <PaperProvider theme={theme}
+    // <SafeAreaView style={{
+    //   minHeight: '100%',
+    // }}>
+    <PaperProvider
+
+      theme={theme}
       settings={{
+
         icon: props => <Ionicons {...props} />,
       }}>
+
+      <View style={{
+        // backgroundColor: theme.colors.primaryLightGreen,
+        height: 40,
+        borderBottomRightRadius: 50,
+        borderBottomLeftRadius: 50
+
+      }}>
+      </View>
       <BottomNavigation
 
 
@@ -77,7 +101,8 @@ export default function App() {
         onIndexChange={setIndex}
         renderScene={renderScene}
       />
-    </PaperProvider>
+    </PaperProvider >
+    // </SafeAreaView>
 
   );
 }
