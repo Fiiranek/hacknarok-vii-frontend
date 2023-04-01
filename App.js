@@ -18,7 +18,7 @@ import Maps from './src/screens/map/Maps';
 import { Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import QRModal from './src/components/qr-modal/QRModal';
-
+import Ranks from './src/screens/ranks/Ranks';
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 
 const fontConfig = {
@@ -106,6 +106,7 @@ export default function App() {
         home: Home,
         profile: Profile,
         maps: Maps,
+        ranks: Ranks,
     });
 
     return (
