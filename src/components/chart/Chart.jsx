@@ -30,7 +30,8 @@ const Chart = () => {
         height={200}
         yAxisLabel="L"
         // yAxisSuffix="k"
-        yAxisInterval={10000} // optional, defaults to 1
+        // yAxisInterval={1} // optional, defaults to 1
+        yAxisInterval={100} // optional, defaults to 1
         chartConfig={{
           //   backgroundColor: "#e26a00",
           backgroundGradientFrom: theme.colors.primaryGreen,

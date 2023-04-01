@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { BottomNavigation, } from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Provider as PaperProvider, MD3LightTheme as DefaultTheme, } from 'react-native-paper';
+import Profile from './src/screens/profile/Profile';
 
 const theme = {
   ...DefaultTheme,
@@ -15,6 +16,17 @@ const theme = {
     primaryLightGreen: "#9CC5A1",
     primaryPlatinium: "DCE1DE",
   },
+  text: {
+
+    h1: {
+      ...DefaultTheme.text,
+      fontSize: 20
+    },
+    h2: {
+      ...DefaultTheme.text,
+      fontSize: 16
+    }
+  }
 };
 
 
@@ -31,6 +43,7 @@ export default function App() {
 
   const renderScene = BottomNavigation.SceneMap({
     home: Home,
+    profile: Profile
 
   });
 
