@@ -1,77 +1,52 @@
-import { StatusBar } from 'expo-status-bar';
+import { useState } from 'react';
+import Home from './src/screens/home/Home';
 import { StyleSheet, Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { BottomNavigation, } from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Start from './src/screens/start/Start';
-import globalStyle from './globalStyle'
-const Tab = createBottomTabNavigator();
-const ICONS = {
-  home: {
-    regular: 'ios-home',
-    outline: 'ios-home-outline',
+import { Provider as PaperProvider, MD3LightTheme as DefaultTheme, } from 'react-native-paper';
+
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primaryBlack: "#1F2421",
+    primaryAqua: "#216869",
+    primaryGreen: "#49A078",
+    primaryLightGreen: "#9CC5A1",
+    primaryPlatinium: "DCE1DE",
   },
-  profile: {
-    regular: 'ios-person',
-    outline: 'ios-person-outline',
-  },
-  maps: {
-    regular: 'ios-map',
-    outline: 'ios-map-outline',
-  },
-  ranks: {
-    regular: 'ios-trophy',
-    outline: 'ios-trophy-outline',
-  },
-  scan: {
-    regular: 'ios-qr-code',
-    outline: 'ios-qr-code-outline',
-  },
+};
 
 
-}
 export default function App() {
+  const [index, setIndex] = useState(0)
+  const [routes] = useState([
+    { key: 'home', title: 'Favorites', focusedIcon: 'home', unfocusedIcon: 'home-outline' },
+    { key: 'maps', title: 'Maps', focusedIcon: 'map', unfocusedIcon: 'map-outline' },
+    { key: 'scan', title: 'Scan', focusedIcon: 'qr-code', unfocusedIcon: 'qr-code-outline' },
+
+    { key: 'ranks', title: 'Ranks', focusedIcon: 'trophy', unfocusedIcon: 'trophy-outline' },
+    { key: 'profile', title: 'Profile', focusedIcon: 'person', unfocusedIcon: 'person-outline' },
+  ]);
+
+  const renderScene = BottomNavigation.SceneMap({
+    home: Home,
+
+  });
+
   return (
-
-    <NavigationContainer>
-      <Tab.Navigator screenOptions={({ route }) => ({
-        headerShown: false,
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName = ICONS[route.name.toLowerCase()].regular;
-          if (route.name === "Scan")
-            return <View style={{
-              width: 80,
-              height: 80,
-              borderRadius: 100,
-              backgroundColor: globalStyle.colors.primaryGreen,
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}>
-              <Ionicons name={iconName} size={30} color={"white"} />
-            </View>
-
-          return <Ionicons name={iconName} size={size} color={focused ? globalStyle.colors.primaryGreen : color} />;
-        },
-        tabBarLabel: ({ focused, color }) => {
-          if (route.name === "Scan") {
-            return <Text style={{ fontSize: 12, height: 10, color: "#fff" }}></Text>
-          }
-          return <Text style={{ fontSize: 12, color: focused ? globalStyle.colors.primaryGreen : color }}>{route.name}</Text>
-        }
+    <PaperProvider theme={theme}
+      settings={{
+        icon: props => <Ionicons {...props} />,
+      }}>
+      <BottomNavigation
 
 
-      })}>
-        <Tab.Screen name="Home" component={Start} />
-        <Tab.Screen name="Maps" component={Start} />
-        <Tab.Screen name="Scan" component={Start} />
-        <Tab.Screen name="Ranks" component={Start} />
-        <Tab.Screen name="Profile" component={Start} />
-
-
-      </Tab.Navigator>
-    </NavigationContainer>
-
+        navigationState={{ index, routes }}
+        onIndexChange={setIndex}
+        renderScene={renderScene}
+      />
+    </PaperProvider>
 
   );
 }
