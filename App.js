@@ -113,9 +113,9 @@ const theme = {
       fontSize: 10
     }
   },
-  fonts: configureFonts({
-    config: fontConfig, isV3: false
-  })
+  // fonts: configureFonts({
+  //   config: fontConfig, isV3: false
+  // })
 };
 
 export default function App() {
