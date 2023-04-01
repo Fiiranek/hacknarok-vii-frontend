@@ -1,15 +1,74 @@
 import { useState } from "react";
 import Home from "./src/screens/home/Home";
-import { StyleSheet, Text, View } from "react-native";
-import { BottomNavigation } from "react-native-paper";
+import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
+import { BottomNavigation, Provider as PaperProvider, MD3LightTheme as DefaultTheme, IconButton, Modal, configureFonts, } from "react-native-paper";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { Provider as PaperProvider, MD3LightTheme as DefaultTheme, Appbar } from "react-native-paper";
+
+import qrCode from "./assets/qr_code.png";
 import Profile from "./src/screens/profile/Profile";
 import Maps from "./src/screens/map/Maps";
 import { Platform } from 'react-native';
 import { SafeAreaView } from "react-native-safe-area-context";
+import QRModal from "./src/components/qr-modal/QRModal";
 
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
+
+const fontConfig = {
+  web: {
+    regular: {
+      fontFamily: 'Raleway-Regular',
+      fontWeight: 'regular',
+    },
+    medium: {
+      fontFamily: 'Raleway-medium',
+      fontWeight: 'regular',
+    },
+    light: {
+      fontFamily: 'Raleway-light',
+      fontWeight: 'regular',
+    },
+    thin: {
+      fontFamily: 'Raleway-thin',
+      fontWeight: 'regular',
+    },
+  },
+  ios: {
+    regular: {
+      fontFamily: 'Raleway',
+      fontWeight: 'regular',
+    },
+    medium: {
+      fontFamily: 'Raleway-medium',
+      fontWeight: 'regular',
+    },
+    light: {
+      fontFamily: 'Raleway-light',
+      fontWeight: 'regular',
+    },
+    thin: {
+      fontFamily: 'Raleway-thin',
+      fontWeight: 'regular',
+    },
+  },
+  android: {
+    regular: {
+      fontFamily: 'Raleway',
+      fontWeight: 'regular',
+    },
+    medium: {
+      fontFamily: 'Raleway-medium',
+      fontWeight: 'regular',
+    },
+    light: {
+      fontFamily: 'Raleway-light',
+      fontWeight: 'regular',
+    },
+    thin: {
+      fontFamily: 'Raleway-thin',
+      fontWeight: 'regular',
+    },
+  }
+};
 
 const theme = {
   ...DefaultTheme,
@@ -53,10 +112,14 @@ const theme = {
       ...DefaultTheme.text,
       fontSize: 10
     }
-  }
+  },
+  fonts: configureFonts({
+    config: fontConfig, isV3: false
+  })
 };
 
 export default function App() {
+  const [showQRModal, setShowQRModal] = useState(0)
   const [index, setIndex] = useState(0)
   const [routes] = useState([
     { key: 'home', title: 'Favorites', focusedIcon: 'home', unfocusedIcon: 'home-outline' },
@@ -94,13 +157,59 @@ export default function App() {
 
       }}>
       </View>
+
+      {/* FLOATING ACTION BUTTON */}
+      <View
+
+        // iconColor={MD3Colors.error50}
+
+
+        style={{
+          position: 'absolute',
+          bottom: 100,
+          right: 100,
+          height: 50,
+          width: 50
+        }}><Ionicons icon="qr-code" size={30} color={"red"} /></View>
+
+
       <BottomNavigation
 
 
         navigationState={{ index, routes }}
-        onIndexChange={setIndex}
+        onIndexChange={(index) => {
+          if (index !== 2) setIndex(index)
+          else setShowQRModal(!showQRModal)
+        }}
         renderScene={renderScene}
       />
+
+      <Modal
+        visible={showQRModal}
+        onDismiss={() => setShowQRModal(0)}
+      // contentContainerStyle={containerStyle}
+      >
+        <View style={{
+          display: "flex",
+          flexDirection: "column",
+          backgroundColor: "white",
+          alignItems: "center",
+          justifyContent: "center",
+          borderRadius: 20,
+          margin: 10,
+          padding: 10
+        }}>
+          <Text style={theme.text.h2}>MY CARD</Text>
+          <Text style={{ ...theme.text.h4, color: theme.colors.primaryGreen }}>Tom</Text>
+          <Image style={{
+            height: Dimensions.get('window').width * 0.8,
+            width: Dimensions.get('window').width * 0.8,
+            resizeMode: 'stretch'
+          }} source={qrCode} />
+          <Text style={{ ...theme.text.h4 }}>8245-9810-4619</Text>
+        </View>
+      </Modal>
+
     </PaperProvider >
     // </SafeAreaView>
 

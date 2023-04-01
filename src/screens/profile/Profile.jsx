@@ -180,6 +180,22 @@ const Profile = () => {
       <View
         style={{
           display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          borderRadius: 20,
+          margin: 5,
+          backgroundColor: "white",
+          width: Dimensions.get("window").width * 0.95,
+          padding: 10,
+        }}
+      >
+        <Chart />
+      </View>
+      {/* BADGES */}
+      <View
+        style={{
+          display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
           alignItems: "center",
@@ -224,23 +240,6 @@ const Profile = () => {
           <Text style={theme.text.h2}>Levels</Text>
         </View>
       </View>
-
-      <View
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          borderRadius: 20,
-          margin: 5,
-          backgroundColor: "white",
-          width: Dimensions.get("window").width * 0.95,
-          padding: 10,
-        }}
-      >
-        <Chart />
-      </View>
-
       <List.Section
         style={{
           width: Dimensions.get("window").width * 0.95,

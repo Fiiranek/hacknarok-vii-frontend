@@ -34,7 +34,7 @@ const Chart = () => {
         height={200}
         // yAxisLabel="L"
         yAxisSuffix=" L"
-        // yAxisInterval={1} // optional, defaults to 1
+        // yAxisInterva{}l={1} // optional, defaults to 1
         yAxisInterval={1} // optional, defaults to 1
         chartConfig={{
           //   backgroundColor: "#e26a00",
