@@ -63,7 +63,7 @@ export default Maps = () => {
           latitudeDelta: 0.2,
           longitudeDelta: 0.2,
         },
-        3 * 1000
+        500
       )
     })()
   }, [])
