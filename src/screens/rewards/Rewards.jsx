@@ -28,7 +28,15 @@ const Rewards = () => {
         justifyContent: "space-evenly",
       }}
     >
-       
+    <View style={{
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems:"flex-start"
+    }}>
+        <Text style={{...theme.text.h1,color:theme.colors.primaryGreen}}>Hi Tom</Text>
+    <Text>You've got {USER_DROPS} drops</Text>
+    </View>
       {rewards.map((r) => {
         const percents = calculatePercents(USER_DROPS, r.cost);
         return (
