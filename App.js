@@ -19,7 +19,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import QRModal from './src/components/qr-modal/QRModal';
 import Ranks from './src/screens/ranks/Ranks';
 import Rewards from './src/screens/rewards/Rewards';
-import StartGuide from './src/screens/start-guide/StartGuide';
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 
 const fontConfig = {
@@ -112,17 +111,17 @@ export default function App() {
     coupons: Rewards,
   });
 
-  const [startGuide, setStartGuide] = useState(false)
+  const [startGuide, setStartGuide] = useState(true)
 
-  useEffect(async () => {
-    const firstTime = await AsyncStorage.getItem("isFirstTime")
-    if (firstTime != null) {
-      // It is not first time use
-    } else {
-      setStartGuide(true)
-      await AsyncStorage.setItem("isFirstTime", 'true')
-    }
-  }, [])
+  // useEffect(async () => {
+  //   const firstTime = await AsyncStorage.getItem("isFirstTime")
+  //   if (firstTime != null) {
+  //     // It is not first time use
+  //   } else {
+  //     setStartGuide(true)
+  //     await AsyncStorage.setItem("isFirstTime", 'true')
+  //   }
+  // }, [])
 
   return (
     <SafeAreaView
@@ -173,7 +172,6 @@ export default function App() {
 
         <QRModal theme={theme} showQRModal={showQRModal} setShowQRModal={setShowQRModal} />
       </PaperProvider>
-      {startGuide && <StartGuide />}
     </SafeAreaView>
   );
 }
