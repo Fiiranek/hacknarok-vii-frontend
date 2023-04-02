@@ -30,11 +30,11 @@ export default () => {
             }}
         >
             <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                <Image style={{ width: 20, height: 20 }} source={lightbulb}></Image>
-                <Text style={{ ...theme.text.h1, alignSelf: 'left', marginLeft: 20 }}>Did you know?</Text>
+                <Image style={{ width: 30, height: 30, marginTop: 10}} source={lightbulb}></Image>
+                <Text style={{ ...theme.text.h1, alignSelf: 'left', marginLeft: 20, marginBottom: 10 }}>Did you know?</Text>
             </View>
 
-            <Text style={theme.text.h2}>{caption}</Text>
+            <Text style={{...theme.text.h2, marginBottom: 10}}>{caption}</Text>
         </View>
     );
 };
