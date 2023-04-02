@@ -9,62 +9,16 @@ import {
 import React from "react";
 import { IconButton, useTheme } from "react-native-paper";
 import DashedLine from "react-native-dashed-line";
-
+import rewards from './rewards'
 import { HEXtoRGB, calculatePercents } from "../../utils";
 const USER_DROPS = 450; //hardcoded for now - should be fetched from the server
 const Rewards = () => {
-  const rewards = [
-    {
-      id: 1,
-      shopTicker: "hm",
-      shopName: "H&M",
-      shopIcon: "hm_white",
-      type: "discout",
-      amount: 10,
-      cost: 1000,
-      description: "10% discount on your next purchase",
-      color: "red",
-    },
-    {
-      id: 1,
-      shopTicker: "reserved",
-      shopName: "Reserved",
-      shopIcon: "reserved",
-      type: "discout",
-      amount: 15,
-      cost: 1500,
-      description: "10% discount on your next purchase",
-      color: "lightgrey",
-    },
-    {
-      id: 1,
-      shopTicker: "reserved",
-      shopName: "Reserved",
-      shopIcon: "diverse",
-      type: "discout",
-      amount: 15,
-      cost: 1500,
-      description: "10% discount on your next purchase",
-      color: "#fff",
-    },
-    {
-      id: 1,
-      shopTicker: "vistula",
-      shopName: "Vistula",
-      shopIcon: "vistula",
-      type: "discout",
-      amount: 15,
-      cost: 700,
-      description: "10% discount on your next purchase",
-      color: "lightgreen",
-    },
-  ];
+  
   const theme = useTheme();
   return (
     <ScrollView
       style={{
         backgroundColor: "#f4f4f4",
-        minHeight: Dimensions.get("window").height,
         width: "100%",
       }}
       contentContainerStyle={{
@@ -91,7 +45,7 @@ const Rewards = () => {
             <View
               style={{
                 backgroundColor: r.color,
-                // borderStyle: "dashed",
+             
                 width: "100%",
                 display: "flex",
                 flexDirection: "column",
@@ -109,6 +63,8 @@ const Rewards = () => {
                 style={{ width: 100, height: 100, objectFit: "contain" }}
               />
             </View>
+            <View style={{  borderStyle: "dashed",
+                borderWidth: 2,width:"100%",borderColor:r.color}}></View>
             <View
               style={{
                 flexdDirection: "column",
