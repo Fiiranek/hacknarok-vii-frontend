@@ -34,3 +34,9 @@ export const HEXtoRGB = (hex, alpha) => {
     }
     return "rgba(" + +r + "," + +g + "," + +b + "," + alpha + ")";
 }
+
+export const calculatePercents = (drops, total) => {
+    const x = Math.floor((drops / total) * 100);
+    if (x > 100) return [100, 0]
+    return [x, 100 - x]
+}

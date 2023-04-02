@@ -9,17 +9,19 @@ import {
   IconButton,
   Modal,
   configureFonts,
+  Appbar,
 } from 'react-native-paper';
 import QRCode from 'react-native-qrcode-svg';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import qrCode from './assets/qr_code.png';
-import Profile from './src/screens/profile/Profile';
+import ProfileWrapper from './src/screens/profile/ProfileWrapper';
 import Maps from './src/screens/map/Maps';
 import { Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import QRModal from './src/components/qr-modal/QRModal';
 import Ranks from './src/screens/ranks/Ranks';
+import Rewards from './src/screens/rewards/Rewards';
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 
 const fontConfig = {
@@ -100,63 +102,50 @@ export default function App() {
     { key: 'maps', title: 'Maps', focusedIcon: 'map', unfocusedIcon: 'map-outline' },
     { key: 'scan', title: 'Scan', focusedIcon: 'qr-code', unfocusedIcon: 'qr-code-outline' },
 
-    { key: 'ranks', title: 'Ranks', focusedIcon: 'trophy', unfocusedIcon: 'trophy-outline' },
-    { key: 'profile', title: 'Profile', focusedIcon: 'person', unfocusedIcon: 'person-outline' },
+    { key: 'coupons', title: 'Coupons', focusedIcon: 'trophy', unfocusedIcon: 'trophy-outline' },
+    { key: 'profileWrapper', title: 'Profile', focusedIcon: 'person', unfocusedIcon: 'person-outline' },
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
-    home: Home,
-    profile: Profile,
+    home: Rewards,
+    profileWrapper: ProfileWrapper,
     maps: Maps,
-    ranks: Ranks,
+    coupons: Rewards,
   });
 
   return (
-    // <SafeAreaView style={{
-    //   minHeight: '100%',
-    // }}>
-    <PaperProvider
-      theme={theme}
-      settings={{
-        icon: props => <Ionicons {...props} />,
-      }}
-    >
-      <View
-        style={{
-          // backgroundColor: theme.colors.primaryLightGreen,
-          height: 40,
-          borderBottomRightRadius: 50,
-          borderBottomLeftRadius: 50,
-        }}
-      ></View>
-
-      {/* FLOATING ACTION BUTTON */}
-      <View
-        // iconColor={MD3Colors.error50}
-
-        style={{
-          position: 'absolute',
-          bottom: 100,
-          right: 100,
-          height: 50,
-          width: 50,
+    <SafeAreaView style={{
+      minHeight: '100%',
+    }}>
+      <PaperProvider
+        theme={theme}
+        settings={{
+          icon: props => <Ionicons {...props} />,
         }}
       >
-        <Ionicons icon="qr-code" size={30} color={'red'} />
-      </View>
+        <Appbar.Header style={{
+          height: 50
+        }}>
+          <Appbar.Content title="" subtitle={'Subtitle'} />
+          <Appbar.Action icon="menu" onPress={() => { }} />
+          <Appbar.Action icon="qr-code" containerColor={theme.colors.primaryGreen}
+            iconColor={"white"} onPress={() => { }} />
+        </Appbar.Header>
 
-      <BottomNavigation
-        navigationState={{ index, routes }}
-        onIndexChange={index => {
-          if (index !== 2) setIndex(index);
-          else setShowQRModal(!showQRModal);
-        }}
-        renderScene={renderScene}
-      />
 
-      <QRModal theme={theme} showQRModal={showQRModal} setShowQRModal={setShowQRModal} />
-    </PaperProvider>
-    // </SafeAreaView>
+        <BottomNavigation
+
+          navigationState={{ index, routes }}
+          onIndexChange={index => {
+            if (index !== 2) setIndex(index);
+            else setShowQRModal(!showQRModal);
+          }}
+          renderScene={renderScene}
+        />
+
+        <QRModal theme={theme} showQRModal={showQRModal} setShowQRModal={setShowQRModal} />
+      </PaperProvider>
+    </SafeAreaView>
   );
 }
 

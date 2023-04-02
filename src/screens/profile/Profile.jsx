@@ -1,69 +1,55 @@
-import { View, Text, Image, Dimensions, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  Dimensions,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import React, { useState } from "react";
 import { IconButton, List } from "react-native-paper";
 import avatar from "../../../assets/avatar.png";
 import medal from "../../../assets/medal.png";
+import history from "../../../assets/history.png";
 import levelUp from "../../../assets/level-up.png";
 import { useTheme } from "react-native-paper";
 import { HEXtoRGB, capitalize } from "../../utils";
 import { ProgressBar } from "react-native-paper";
 import Chart from "../../components/chart/Chart";
+import TXHistory from "../tx-ihstory/TXHistory";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+export default Profile = () => {
+  const navigation = useNavigation();
 
-const Profile = () => {
+  const tiles = [
+    {
+      id: 1,
+      title: "History",
+      icon: history,
+      screen: "tx-history",
+    },
+    {
+      id: 2,
+      title: "Badges",
+      icon: medal,
+      screen: TXHistory,
+    },
+    {
+      id: 3,
+      title: "Ranks",
+      icon: levelUp,
+      screen: TXHistory,
+    },
+    {
+      id: 3,
+      title: "Ranks",
+      icon: levelUp,
+      screen: TXHistory,
+    },
+  ];
+
   const theme = useTheme();
-  const [expanded, setExpanded] = useState(true);
-
-  const handlePress = () => setExpanded(!expanded);
-  const [transactions, setTransactions] = useState([
-    {
-      id: 1,
-      date: "2021-01-01",
-      time: "8:37 PM",
-      location: "H&M St. John avenue",
-      amount: 100,
-      type: "deposit",
-    },
-    {
-      id: 1,
-      date: "2021-01-01",
-      time: "8:37 PM",
-      location: "H&M St. John avenue",
-      amount: 100,
-      type: "pick-up",
-    },
-    {
-      id: 1,
-      date: "2021-01-01",
-      time: "8:37 PM",
-      location: "House av. Saint Paul",
-      amount: 300,
-      type: "deposit",
-    },
-    {
-      id: 1,
-      date: "2021-01-01",
-      time: "8:37 PM",
-      location: "House av. Saint Paul",
-      amount: 300,
-      type: "deposit",
-    },
-    {
-      id: 1,
-      date: "2021-01-01",
-      time: "8:37 PM",
-      location: "House av. Saint Paul",
-      amount: 300,
-      type: "deposit",
-    },
-    {
-      id: 1,
-      date: "2021-01-01",
-      time: "8:37 PM",
-      location: "House av. Saint Paul",
-      amount: 300,
-      type: "deposit",
-    },
-  ]);
   return (
     <ScrollView
       style={{
@@ -132,6 +118,7 @@ const Profile = () => {
               marginVertical: 10,
               height: 20,
               borderRadius: 100,
+              backgroundColor: HEXtoRGB(theme.colors.primaryBlue, 0.5),
             }}
             progress={0.45}
             color={theme.colors.primaryBlue}
@@ -169,7 +156,11 @@ const Profile = () => {
             }}
           >
             <Text
-              style={{ ...theme.text.h5, color: "white", fontWeight: "bold" }}
+              style={{
+                ...theme.text.h5,
+                color: "white",
+                fontWeight: "bold",
+              }}
             >
               8
             </Text>
@@ -193,147 +184,49 @@ const Profile = () => {
         <Chart />
       </View>
       {/* BADGES */}
+
       <View
         style={{
           display: "flex",
           flexDirection: "row",
-          justifyContent: "space-between",
+          justifyContent: "space-evenly",
           alignItems: "center",
+          flexWrap: "wrap",
         }}
       >
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            borderRadius: 20,
-            margin: 5,
-            backgroundColor: "white",
-            width: (Dimensions.get("window").width * 0.95) / 2 - 5,
-            padding: 10,
-          }}
-        >
-          <Image
-            source={medal}
-            style={{ height: 64, width: 64, marginBottom: 10 }}
-          />
-          <Text style={theme.text.h2}>Badges</Text>
-        </View>
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            borderRadius: 20,
-            margin: 5,
-            backgroundColor: "white",
-            width: (Dimensions.get("window").width * 0.95) / 2 - 5,
-            padding: 10,
-          }}
-        >
-          <Image
-            source={levelUp}
-            style={{ height: 64, width: 64, marginBottom: 10 }}
-          />
-          <Text style={theme.text.h2}>Levels</Text>
-        </View>
-      </View>
-
-      {transactions.map((tx, index) => {
-        let deposit = tx.type === "deposit";
-        return (
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              backgroundColor: "white",
-              borderRadius: 20,
-              padding: 10,
-              marginVertical: 5,
-              width: "95%",
-            }}
-          >
-            <IconButton icon={deposit ? "shirt" : "add-circle"} size={30} />
-            <View>
-              <Text style={theme.text.h2}>
-                {capitalize(tx.type).replace("-", " ")}
-              </Text>
-              <Text style={theme.text.h4}>Hour: {tx.time}</Text>
-              <Text style={theme.text.h4}>Location: {tx.location}</Text>
-            </View>
-          </View>
-        );
-      })}
-
-      <List.Section
-        style={{
-          width: Dimensions.get("window").width * 0.95,
-          backgroundColor: "#f4f4f4",
-        }}
-        titleStyle={{
-          backgroundColor: "#f4f4f4",
-        }}
-        // title="Commitment to saving world <3"
-      >
-        {transactions.map((tx, index) => {
-          let deposit = tx.type === "deposit";
+        {tiles.map((tile, index) => {
           return (
-            <List.Accordion
-              style={{
-                // backgroundColor: HEXtoRGB(theme.colors.primaryLightGreen, 0.2),
-                backgroundColor: "white",
-                borderRadius: 20,
-                marginVertical: 5,
+            <TouchableOpacity
+              key={`${tile}-${index}`}
+              onPress={() => {
+                console.log(tile.screen);
+                if (navigation) navigation.navigate(tile.screen);
+                else console.log("NO NAV");
               }}
-              key={"tx" + index}
-              title={capitalize(tx.type).replace("-", " ")}
-              //   description={"Hour: 8:37 PM\nLocation: H&M St. John avenue"}
-              description={
-                <View>
-                  <Text style={theme.text.h4}>Hour: {tx.time}</Text>
-                  <Text style={theme.text.h4}>Location: {tx.location}</Text>
-                </View>
-              }
-              descriptionNumberOfLines={3}
-              left={(props) => (
-                <List.Icon {...props} icon={deposit ? "shirt" : "add-circle"} />
-              )}
-              expanded={false}
-              right={(props) => (
-                <View
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                  }}
-                >
-                  <Text
-                    style={{
-                      color: deposit ? theme.colors.primaryBlue : theme.primary,
-                    }}
-                  >
-                    {deposit ? "+" : "-"}
-                    {tx.amount}
-                  </Text>
-                  <List.Icon
-                    {...props}
-                    icon="water"
-                    color={deposit ? theme.colors.primaryBlue : theme.primary}
-                  />
-                </View>
-              )}
-              //   onPress={handlePress}
             >
-              {/* <List.Item title="First item" />
-              <List.Item title="Second item" /> */}
-            </List.Accordion>
+              <View
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: 20,
+                  margin: 5,
+                  backgroundColor: "white",
+                  width: (Dimensions.get("window").width * 0.95) / 2 - 5,
+                  padding: 10,
+                }}
+              >
+                <Image
+                  source={tile.icon}
+                  style={{ height: 64, width: 64, marginBottom: 10 }}
+                />
+                <Text style={theme.text.h2}>{tile.title}</Text>
+              </View>
+            </TouchableOpacity>
           );
         })}
-      </List.Section>
+      </View>
     </ScrollView>
   );
 };
-
-export default Profile;
