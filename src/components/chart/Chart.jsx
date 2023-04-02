@@ -12,7 +12,7 @@ import React from "react";
 import { getLastMonths, sum } from "../../utils";
 import { useTheme } from "react-native-paper";
 
-const Chart = () => {
+const Chart = ({props}) => {
   const theme = useTheme();
   const data = [20, 35, 28];
   return (
@@ -29,12 +29,13 @@ const Chart = () => {
       }}
     >
       <Text style={{ ...theme.text.h3, textAlign: "center", maxWidth: "80%" }}>
-        {sum(data)} L of water saved in last 3 months!
+        {sum(data)} L water saved
       </Text>
       <LineChart
+   
         // fromZero={true}
         data={{
-          labels: getLastMonths(3),
+          labels: getLastMonths(data.length),
           datasets: [
             {
               data: data,
@@ -53,7 +54,7 @@ const Chart = () => {
           backgroundGradientFrom: "white",
           backgroundGradientTo: "white",
           decimalPlaces: 0, // optional, defaults to 2dp
-          color: (opacity = 1) => theme.colors.primaryBlue,
+          color: (opacity = 1) => theme.colors.primaryGreen,
           //   color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
           labelColor: (opacity = 1) => "black",
 
@@ -72,6 +73,7 @@ const Chart = () => {
           marginVertical: 8,
           borderRadius: 16,
         }}
+           {...props}
       />
     </View>
   );

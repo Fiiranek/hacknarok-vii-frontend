@@ -2,6 +2,7 @@ import { ScrollView, Text } from 'react-native';
 import React from 'react';
 import Chart from '../../components/chart/Chart';
 import Funfact from '../../components/funfacts/Funfact';
+import ClothesChart from '../../components/chart/ClothesChart';
 export default Home = () => {
     return (
         <ScrollView
@@ -10,6 +11,8 @@ export default Home = () => {
                 display: 'flex',
                 flexDirection: 'column',
             }}
-        ></ScrollView>
+        >
+          <ClothesChart />
+        </ScrollView>
     );
 };

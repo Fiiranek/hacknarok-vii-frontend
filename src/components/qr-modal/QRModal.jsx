@@ -1,10 +1,10 @@
-import { View, Text, Dimensions } from "react-native";
+import { View, Text } from "react-native";
 import React from "react";
 import { Modal, Button } from "react-native-paper";
 import QRCode from "react-native-qrcode-svg";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import * as Clipboard from "expo-clipboard";
-const QRModal = ({ showQRModal, setShowQRModal, theme }) => {
+const QRModal = ({ showQRModal, setShowQRModal,theme}) => {
   return (
     <Modal
       visible={showQRModal}
@@ -24,7 +24,7 @@ const QRModal = ({ showQRModal, setShowQRModal, theme }) => {
           padding: 10,
         }}
       >
-        <Text style={theme.text.h1}>Scan your QR Code </Text>
+        <Text style={{...theme.text.h1,color:theme.colors.primaryGreen}}>Scan your QR Code </Text>
         <Text
           style={{
             ...theme.text.h3,

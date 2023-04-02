@@ -15,6 +15,7 @@ import TXHistory from '../tx-ihstory/TXHistory';
 import { useNavigation } from '@react-navigation/native';
 import { FlatList } from 'react-native-gesture-handler';
 import Funfact from '../../components/funfacts/Funfact';
+import ClothesChart from '../../components/chart/ClothesChart';
 export default Profile = () => {
     const navigation = useNavigation();
     const theme = useTheme();
@@ -76,7 +77,7 @@ export default Profile = () => {
                             height: '100%',
                         }}
                     >
-                        <Text style={theme.text.h2}>Water saved</Text>
+                        <Text style={theme.text.h2}>Total water saved</Text>
                         <View
                             style={{
                                 borderRadius: 100,
@@ -102,7 +103,7 @@ export default Profile = () => {
                 </TouchableOpacity>
             ),
         },
-        { component: <Chart /> },
+        { component: <ClothesChart/>},
     ];
     const tiles = [
         {
