@@ -185,7 +185,7 @@ export default Profile = () => {
                         Lvl. 8
                     </Text>
                 </View>
-                <Text style={theme.text.h2}>Hi Tom!</Text>
+                <Text style={theme.text.h1}>Hi Tom!</Text>
                 <View
                     style={{
                         display: 'flex',
@@ -223,7 +223,7 @@ export default Profile = () => {
                             }}
                         >
                             <IconButton icon="water" iconColor={theme.colors.primaryBlue} size={30} />
-                            <Text style={theme.text.h1}>45/100</Text>
+                            <Text style={{...theme.text.h1,position:"relative",marginLeft:-5}}>45/100</Text>
                         </View>
                     </View>
                 </View>
