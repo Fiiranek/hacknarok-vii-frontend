@@ -30,7 +30,11 @@ export default ProfileWrapper = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
         <Stack.Screen name="profile" component={Profile} />
         <Stack.Screen name="tx-history" component={TXHistory} />
       </Stack.Navigator>

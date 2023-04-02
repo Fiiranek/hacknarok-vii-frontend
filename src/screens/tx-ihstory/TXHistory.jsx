@@ -75,19 +75,30 @@ const TXHistory = () => {
   ]);
 
   return (
-    <ScrollView>
+    <ScrollView
+      style={{
+        backgroundColor: "white",
+        width: Dimensions.get("window").width,
+      }}
+      contentContainerStyle={{
+        flexdDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       {transactions.map((tx, index) => {
         let deposit = tx.type === "deposit";
         return (
           <View
             style={{
+              width: Dimensions.get("window").width,
               flexDirection: "row",
               alignItems: "center",
               backgroundColor: "white",
               //   borderRadius: 20,
               padding: 10,
               //   marginVertical: 5,
-              borderBottomWidth: 1,
+              borderBottomWidth: index === transactions.length - 1 ? 0 : 1,
               borderStyle: "solid",
               borderColor: "#ddd",
               width: "95%",
