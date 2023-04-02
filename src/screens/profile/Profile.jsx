@@ -136,7 +136,7 @@ export default Profile = () => {
         <ScrollView
             style={{
                 backgroundColor: '#f4f4f4',
-                marginTop: 50,
+                // marginTop: 50,
                 display: 'flex',
                 flexDirection: 'column',
             }}
