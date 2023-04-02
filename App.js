@@ -1,17 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Home from './src/screens/home/Home';
-import { registerRootComponent } from 'expo';
-import { AppRegistry, Dimensions, Image, StyleSheet, Text, View } from 'react-native';
+import { AppRegistry, Image, StyleSheet, } from 'react-native';
 import {
   BottomNavigation,
   Provider as PaperProvider,
   MD3LightTheme as DefaultTheme,
-  IconButton,
-  Modal,
   configureFonts,
   Appbar,
 } from 'react-native-paper';
-import QRCode from 'react-native-qrcode-svg';
+import StepIndicator from 'react-native-step-indicator';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import qrCode from './assets/qr_code.png';
@@ -22,6 +19,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import QRModal from './src/components/qr-modal/QRModal';
 import Ranks from './src/screens/ranks/Ranks';
 import Rewards from './src/screens/rewards/Rewards';
+import StartGuide from './src/screens/start-guide/StartGuide';
 const MORE_ICON = Platform.OS === 'ios' ? 'dots-horizontal' : 'dots-vertical';
 
 const fontConfig = {
@@ -99,7 +97,7 @@ export default function App() {
   const [showQRModal, setShowQRModal] = useState(0);
   const [index, setIndex] = useState(0);
   const [routes] = useState([
-    { key: 'home', title: 'Favorites', focusedIcon: 'home', unfocusedIcon: 'home-outline' },
+    // { key: 'home', title: 'Home', focusedIcon: 'home', unfocusedIcon: 'home-outline' },
     { key: 'maps', title: 'Maps', focusedIcon: 'map', unfocusedIcon: 'map-outline' },
     { key: 'scan', title: 'Scan', focusedIcon: 'qr-code', unfocusedIcon: 'qr-code-outline' },
 
@@ -108,11 +106,23 @@ export default function App() {
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
-    home: Home,
+    // home: Home,
     profileWrapper: ProfileWrapper,
     maps: Maps,
     coupons: Rewards,
   });
+
+  const [startGuide, setStartGuide] = useState(false)
+
+  useEffect(async () => {
+    const firstTime = await AsyncStorage.getItem("isFirstTime")
+    if (firstTime != null) {
+      // It is not first time use
+    } else {
+      setStartGuide(true)
+      await AsyncStorage.setItem("isFirstTime", 'true')
+    }
+  }, [])
 
   return (
     <SafeAreaView
@@ -155,7 +165,7 @@ export default function App() {
           }}
           navigationState={{ index, routes }}
           onIndexChange={index => {
-            if (index !== 2) setIndex(index);
+            if (index !== 1) setIndex(index);
             else setShowQRModal(!showQRModal);
           }}
           renderScene={renderScene}
@@ -163,6 +173,7 @@ export default function App() {
 
         <QRModal theme={theme} showQRModal={showQRModal} setShowQRModal={setShowQRModal} />
       </PaperProvider>
+      {startGuide && <StartGuide />}
     </SafeAreaView>
   );
 }

@@ -34,11 +34,17 @@ const Rewards = () => {
         paddingBottom:10,
         width: "100%",
         display: "flex",
-        flexDirection: "column",
-        alignItems:"flex-start"
+        flexDirection: "row",
+        alignItems:"flex-end",
+        justifyContent:"space-between"
     }}>
-        <Text style={{...theme.text.h1,color:theme.colors.primaryGreen}}>Hi Tom</Text>
-    <Text>You've got {USER_DROPS} drops</Text>
+       <View>
+       <Text style={{...theme.text.h1,color:theme.colors.primaryGreen,fontSize:24}}>Hi Tom</Text>
+        <Text style={{...theme.text.h2}}>You've got {USER_DROPS} drops</Text>
+       </View>
+       <View >
+         <IconButton icon="filter"  size={24} onPress={() => {}}/>
+       </View>
     </View>
       {rewards.map((r) => {
         const percents = calculatePercents(USER_DROPS, r.cost);
@@ -89,8 +95,8 @@ const Rewards = () => {
                 backgroundColor: "white",
               }}
             >
-              <Text style={theme.text.h1}>{r.amount}% off</Text>
-              <Text style={theme.text.h2}>{r.shopName}</Text>
+              <Text style={{...theme.text.h2,fontWeight:"bold"}}>{r.amount}% off</Text>
+              <Text style={theme.text.h3}>{r.shopName}</Text>
               <View
                 style={{
                   width: "100%",
