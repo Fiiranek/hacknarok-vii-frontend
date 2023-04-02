@@ -127,7 +127,7 @@ export default function App() {
           height: 50
         }}>
           <Appbar.Content title="" subtitle={'Subtitle'} />
-          <Appbar.Action icon="menu" onPress={() => { }} />
+          <Appbar.Action icon="ellipsis-vertical" onPress={() => { }} />
           <Appbar.Action icon="qr-code" containerColor={theme.colors.primaryGreen}
             iconColor={"white"} onPress={() => { }} />
         </Appbar.Header>

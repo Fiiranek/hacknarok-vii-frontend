@@ -6,22 +6,109 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React from "react";
 import { IconButton, List } from "react-native-paper";
 import avatar from "../../../assets/avatar.png";
 import medal from "../../../assets/medal.png";
 import history from "../../../assets/history.png";
 import levelUp from "../../../assets/level-up.png";
+import stats from "../../../assets/stats.png";
+import shirt from "../../../assets/shirt.png";
 import { useTheme } from "react-native-paper";
-import { HEXtoRGB, capitalize } from "../../utils";
+import { HEXtoRGB } from "../../utils";
 import { ProgressBar } from "react-native-paper";
 import Chart from "../../components/chart/Chart";
 import TXHistory from "../tx-ihstory/TXHistory";
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useNavigation } from "@react-navigation/native";
+import { FlatList } from "react-native-gesture-handler";
 export default Profile = () => {
   const navigation = useNavigation();
+  const theme = useTheme();
+  const data = [
+    { component: <Chart /> },
+    {
+      component: (
+        <TouchableOpacity onPress={() => {}}>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              borderRadius: 20,
+              margin: 0,
+              backgroundColor: "white",
 
+              padding: 10,
+              height: "100%",
+            }}
+          >
+            <Text style={theme.text.h2}>Tshirts saved</Text>
+            <View
+              style={{
+                borderRadius: 100,
+                backgroundColor: HEXtoRGB(theme.colors.primaryBlue, 0.2),
+                width: 100,
+                height: 100,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                marginVertical: 10,
+              }}
+            >
+              <Image source={shirt} style={{ height: 64, width: 64 }} />
+            </View>
+
+            <Text style={theme.text.h1}>20</Text>
+          </View>
+        </TouchableOpacity>
+      ),
+    },
+    {
+      component: (
+        <TouchableOpacity onPress={() => {}}>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              borderRadius: 20,
+              margin: 0,
+              backgroundColor: "white",
+
+              padding: 10,
+              height: "100%",
+            }}
+          >
+            <Text style={theme.text.h2}>Water saved</Text>
+            <View
+              style={{
+                borderRadius: 100,
+                backgroundColor: HEXtoRGB(theme.colors.primaryBlue, 0.2),
+                width: 100,
+                height: 100,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                marginVertical: 10,
+              }}
+            >
+              <IconButton
+                icon="water"
+                iconColor={theme.colors.primaryBlue}
+                size={64}
+                onPress={() => console.log("Pressed")}
+              />
+            </View>
+
+            <Text style={theme.text.h1}>256 L</Text>
+          </View>
+        </TouchableOpacity>
+      ),
+    },
+    { component: <Chart /> },
+  ];
   const tiles = [
     {
       id: 1,
@@ -39,17 +126,16 @@ export default Profile = () => {
       id: 3,
       title: "Ranks",
       icon: levelUp,
-      screen: TXHistory,
+      screen: "ranks",
     },
     {
-      id: 3,
-      title: "Ranks",
-      icon: levelUp,
-      screen: TXHistory,
+      id: 4,
+      title: "Stats",
+      icon: stats,
+      screen: "stats",
     },
   ];
 
-  const theme = useTheme();
   return (
     <ScrollView
       style={{
@@ -140,50 +226,40 @@ export default Profile = () => {
                 flexDirection: "row",
               }}
             >
-              <List.Icon icon="water" color={theme.colors.primaryBlue} />
-              <Text style={theme.text.h2}>45/100</Text>
+              <IconButton
+                icon="water"
+                iconColor={theme.colors.primaryBlue}
+                size={30}
+              />
+              <Text style={theme.text.h1}>45/100</Text>
             </View>
-          </View>
-          <View
-            style={{
-              width: "90%",
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-              position: "relative",
-              top: -54,
-            }}
-          >
-            <Text
-              style={{
-                ...theme.text.h5,
-                color: "white",
-                fontWeight: "bold",
-              }}
-            >
-              8
-            </Text>
-            <Text style={{ ...theme.text.h5, fontWeight: "bold" }}>9</Text>
           </View>
         </View>
       </View>
-      <View
+
+      <FlatList
+        horizontal={true}
+        data={data}
         style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          borderRadius: 20,
-          margin: 5,
-          backgroundColor: "white",
-          width: Dimensions.get("window").width * 0.95,
-          padding: 10,
+          padding: 0,
+          marginVertical: 5,
+          backgroundColor: "#f4f4f4",
         }}
-      >
-        <Chart />
-      </View>
-      {/* BADGES */}
+        renderItem={({ item }) => {
+          return (
+            <View
+              style={{
+                marginHorizontal: 7,
+                display: "flex",
+
+                // width: Dimensions.get("window").width * 0.6,
+              }}
+            >
+              {item.component}
+            </View>
+          );
+        }}
+      />
 
       <View
         style={{

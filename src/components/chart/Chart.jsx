@@ -16,8 +16,19 @@ const Chart = () => {
   const theme = useTheme();
   const data = [20, 35, 28];
   return (
-    <View>
-      <Text style={{ ...theme.text.h2, textAlign: "center" }}>
+    <View
+      style={{
+        backgroundColor: "white",
+        borderRadius: 20,
+        paddingVertical: 5,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        minWidth: Dimensions.get("window").width * 0.7,
+      }}
+    >
+      <Text style={{ ...theme.text.h3, textAlign: "center", maxWidth: "80%" }}>
         {sum(data)} L of water saved in last 3 months!
       </Text>
       <LineChart
@@ -30,7 +41,7 @@ const Chart = () => {
             },
           ],
         }}
-        width={Dimensions.get("window").width * 0.8} // from react-native
+        width={Dimensions.get("window").width * 0.6} // from react-native
         height={200}
         // yAxisLabel="L"
         yAxisSuffix=" L"

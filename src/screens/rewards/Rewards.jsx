@@ -7,8 +7,9 @@ import {
   ScrollView,
 } from "react-native";
 import React from "react";
-import { useTheme } from "react-native-paper";
+import { IconButton, useTheme } from "react-native-paper";
 import DashedLine from "react-native-dashed-line";
+
 import { HEXtoRGB, calculatePercents } from "../../utils";
 const USER_DROPS = 450; //hardcoded for now - should be fetched from the server
 const Rewards = () => {
@@ -156,17 +157,32 @@ const Rewards = () => {
                         height: 30,
                       }}
                     >
-                      <Text
+                      <View
                         style={{
-                          color: "white",
-                          textAlign: "center",
-                          position: "relative",
-                          top: 4,
-                          fontWeight: "bold",
+                          flexDirection: "row",
+                          alignItems: "center",
+                          justifyContent: "center",
                         }}
                       >
-                        {r.cost} drops
-                      </Text>
+                        <Text
+                          style={{
+                            color: "white",
+                            textAlign: "center",
+                            position: "relative",
+                            right: -10,
+                            // top: 4,
+                            fontWeight: "bold",
+                          }}
+                        >
+                          {r.cost}{" "}
+                        </Text>
+                        <IconButton
+                          icon="water"
+                          iconColor={"white"}
+                          size={20}
+                        />
+                      </View>
+
                       <View
                         style={{
                           width: percents[0],

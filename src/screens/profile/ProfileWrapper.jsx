@@ -20,6 +20,7 @@ import TXHistory from "../tx-ihstory/TXHistory";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Profile from "./Profile";
+import Ranks from "../ranks/Ranks";
 
 const Stack = createNativeStackNavigator();
 
@@ -31,12 +32,14 @@ export default ProfileWrapper = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
+        initialRouteName="profile"
         screenOptions={{
           headerShown: false,
         }}
       >
         <Stack.Screen name="profile" component={Profile} />
         <Stack.Screen name="tx-history" component={TXHistory} />
+        <Stack.Screen name="ranks" component={Ranks} />
       </Stack.Navigator>
     </NavigationContainer>
   );

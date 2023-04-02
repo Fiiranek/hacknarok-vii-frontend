@@ -27,7 +27,7 @@ const QRModal = ({ showQRModal, setShowQRModal, theme }) => {
         <Text style={theme.text.h1}>Scan your QR Code </Text>
         <Text
           style={{
-            ...theme.text.h4,
+            ...theme.text.h3,
             color: theme.colors.primaryPlatinium,
             textAlign: "center",
             marginBottom: 30,
@@ -37,8 +37,8 @@ const QRModal = ({ showQRModal, setShowQRModal, theme }) => {
           rewards.
         </Text>
         <QRCode size={200} value="8245-9810-4619" />
-        <Text style={{ ...theme.text.h4, marginTop: 10 }}>8245-9810-4619</Text>
-        <TouchableOpacity
+        <Text style={{ ...theme.text.h1, marginTop: 10 }}>8245-9810-4619</Text>
+        {/* <TouchableOpacity
           onPress={async () => {
             await Clipboard.setStringAsync("8245-9810-4619");
           }}
@@ -52,7 +52,7 @@ const QRModal = ({ showQRModal, setShowQRModal, theme }) => {
               Copy code to clipboard
             </Button>
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </Modal>
   );
