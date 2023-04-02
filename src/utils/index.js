@@ -1,9 +1,16 @@
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December",];
-export const getLastMonths = (n = 3) => {
+export const getLastMonths = (n = 3, k = false) => {
     let months = [];
     for (let i = 0; i < n; i++) {
         let index = new Date(new Date().setMonth(new Date().getMonth() - i)).getMonth();
-        months.push(MONTHS[index]);
+        if (k) {
+            months.push(MONTHS[index].substr(0, k));
+
+        }
+        else {
+            months.push(MONTHS[index]);
+        }
+
     }
     months.reverse()
     return months;
