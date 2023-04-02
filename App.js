@@ -129,7 +129,8 @@ export default function App() {
         <Appbar.Header
           style={{
             height: 40,
-            backgroundColor: "white"
+            backgroundColor: "white",
+            paddingBottom: 5
           }}
         >
           <Appbar.Content title="" subtitle={'Subtitle'} />

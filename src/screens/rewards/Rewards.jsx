@@ -29,6 +29,9 @@ const Rewards = () => {
       }}
     >
     <View style={{
+        backgroundColor:"white",
+        paddingHorizontal:20,
+        paddingBottom:10,
         width: "100%",
         display: "flex",
         flexDirection: "column",
