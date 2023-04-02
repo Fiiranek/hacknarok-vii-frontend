@@ -40,6 +40,7 @@ export default Profile = () => {
               backgroundColor: "white",
 
               padding: 10,
+              paddingHorizontal: 20,
               height: "100%",
             }}
           >
@@ -76,7 +77,7 @@ export default Profile = () => {
               borderRadius: 20,
               margin: 0,
               backgroundColor: "white",
-
+              paddingHorizontal: 20,
               padding: 10,
               height: "100%",
             }}

@@ -134,7 +134,15 @@ export default function App() {
 
 
         <BottomNavigation
+          barStyle={{
+            backgroundColor: "white",
 
+            // height: 50,
+          }}
+          renderIcon={({ route, focused, color }) => {
+
+            return <Ionicons name={focused ? route.focusedIcon : route.unfocusedIcon} size={24} color={focused ? theme.colors.primaryGreen : color} selectionColor={focused ? theme.colors.primaryGreen : "white"} />;
+          }}
           navigationState={{ index, routes }}
           onIndexChange={index => {
             if (index !== 2) setIndex(index);
