@@ -20,9 +20,9 @@ export default Maps = () => {
 
     const [region, setRegion] = useState({
         latitude: 51.9189046,
-        longitude: -19.1343786,
-        latitudeDelta: 0.01,
-        longitudeDelta: 0.01,
+        longitude: 20.1343786,
+        latitudeDelta: 0.2,
+        longitudeDelta: 0.2,
     });
     const [errorMsg, setErrorMsg] = useState(null);
     const mapRef = useRef(null);
@@ -43,15 +43,15 @@ export default Maps = () => {
             setRegion({
                 latitude: latitude,
                 longitude: longitude,
-                latitudeDelta: 0.01,
-                longitudeDelta: 0.01,
+                latitudeDelta: 0.2,
+                longitudeDelta: 0.2,
             });
             mapRef.current.animateToRegion(
                 {
                     latitude: latitude,
                     longitude: longitude,
-                    latitudeDelta: 0.01,
-                    longitudeDelta: 0.01,
+                    latitudeDelta: 0.2,
+                    longitudeDelta: 0.2,
                 },
                 3 * 1000,
             );
@@ -85,6 +85,12 @@ export default Maps = () => {
             <MapView
                 ref={mapRef}
                 provider="google"
+                initialRegion={{
+                    latitude: 51.9189046,
+                    longitude: 20.1343786,
+                    latitudeDelta: 10,
+                    longitudeDelta: 10,
+                }}
                 mapPadding={{ top: 100, right: 0, bottom: 100, left: 0 }}
                 showsCompass={true}
                 showsUserLocation={true}
