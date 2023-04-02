@@ -112,7 +112,7 @@ const TXHistory = () => {
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-      <Text style={{ ...theme.text.h1 }}>Hsitory</Text>
+      <List.Subheader style={theme.text.h1}>Leaderboard</List.Subheader>
       {transactions.map((tx, index) => {
         let deposit = tx.type === 'return'
         console.log(1)
@@ -149,7 +149,9 @@ const TXHistory = () => {
                 {capitalize(tx.type).replace('-', ' ')}
               </Text>
               <Text style={theme.text.h4}>Hour: {tx.time}</Text>
-              <Text style={theme.text.h4}>Location: {tx.location}</Text>
+              <Text style={theme.text.h4}>
+                Location: {tx.location.substr(0, 20)}
+              </Text>
             </View>
             <View
               style={{
