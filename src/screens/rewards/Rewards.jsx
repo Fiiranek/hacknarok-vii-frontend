@@ -28,6 +28,7 @@ const Rewards = () => {
         justifyContent: "space-evenly",
       }}
     >
+       
       {rewards.map((r) => {
         const percents = calculatePercents(USER_DROPS, r.cost);
         return (

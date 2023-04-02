@@ -127,7 +127,8 @@ export default function App() {
       >
         <Appbar.Header
           style={{
-            height: 50,
+            height: 40,
+            backgroundColor: "white"
           }}
         >
           <Appbar.Content title="" subtitle={'Subtitle'} />
@@ -138,17 +139,17 @@ export default function App() {
         <BottomNavigation
           barStyle={{
             backgroundColor: "white",
-            
+
             // height: 50,
           }}
-    
+
           renderIcon={({ route, focused, color }) => {
-            return <Ionicons 
-            name={focused ? route.focusedIcon : route.unfocusedIcon} 
-            
-            size={24} 
-            color={focused ? "black": color} 
-            selectionColor={focused ? "black": "white"} ></Ionicons>
+            return <Ionicons
+              name={focused ? route.focusedIcon : route.unfocusedIcon}
+
+              size={24}
+              color={focused ? "black" : color}
+              selectionColor={focused ? "black" : "white"} ></Ionicons>
           }}
           navigationState={{ index, routes }}
           onIndexChange={index => {
