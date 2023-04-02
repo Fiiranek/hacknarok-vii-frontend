@@ -35,6 +35,8 @@ export default ProfileWrapper = () => {
         initialRouteName="profile"
         screenOptions={{
           // headerShown: false,
+          headerTitle:"",
+          headerBackButtonMenuEnabled:true
         }}
       >
         <Stack.Screen name="profile" component={Profile} />

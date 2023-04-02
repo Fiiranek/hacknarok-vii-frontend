@@ -54,7 +54,7 @@ const Chart = ({props}) => {
           backgroundGradientFrom: "white",
           backgroundGradientTo: "white",
           decimalPlaces: 0, // optional, defaults to 2dp
-          color: (opacity = 1) => theme.colors.primaryGreen,
+          color: (opacity = 1) => theme.colors.primaryBlue,
           //   color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
           labelColor: (opacity = 1) => "black",
 
