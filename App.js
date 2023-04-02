@@ -52,6 +52,7 @@ const theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
+    secondaryContainer: "white",
     primaryBlack: '#1F2421',
     primaryAqua: '#216869',
     primaryBlue: '#1CB4E5',
