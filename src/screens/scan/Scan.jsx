@@ -1,12 +1,12 @@
 import { View, Text } from "react-native";
 import React from "react";
 
-const Start = () => {
+const Scan = () => {
   return (
     <View>
-      <Text>Start</Text>
+      <Text>Scan</Text>
     </View>
   );
 };
 
-export default Start;
+export default Scan;
