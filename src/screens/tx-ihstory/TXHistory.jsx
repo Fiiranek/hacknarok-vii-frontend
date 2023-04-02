@@ -115,6 +115,7 @@ const TXHistory = () => {
       <Text style={{ ...theme.text.h1 }}>Hsitory</Text>
       {transactions.map((tx, index) => {
         let deposit = tx.type === 'return'
+        console.log(1)
         return (
           <View
             style={{
