@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Home from './src/screens/home/Home';
-import { registerRootComponent } from 'expo'
+import { registerRootComponent } from 'expo';
 import { AppRegistry, Dimensions, Image, StyleSheet, Text, View } from 'react-native';
 import {
   BottomNavigation,
@@ -107,31 +107,33 @@ export default function App() {
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
-    home: Rewards,
+    home: Home,
     profileWrapper: ProfileWrapper,
     maps: Maps,
     coupons: Rewards,
   });
 
   return (
-    <SafeAreaView style={{
-      minHeight: '100%',
-    }}>
+    <SafeAreaView
+      style={{
+        minHeight: '100%',
+      }}
+    >
       <PaperProvider
         theme={theme}
         settings={{
           icon: props => <Ionicons {...props} />,
         }}
       >
-        <Appbar.Header style={{
-          height: 50
-        }}>
+        <Appbar.Header
+          style={{
+            height: 50,
+          }}
+        >
           <Appbar.Content title="" subtitle={'Subtitle'} />
           <Appbar.Action icon="ellipsis-vertical" onPress={() => { }} />
-          <Appbar.Action icon="qr-code" containerColor={theme.colors.primaryGreen}
-            iconColor={"white"} onPress={() => { }} />
+          <Appbar.Action icon="qr-code" containerColor={theme.colors.primaryGreen} iconColor={'white'} onPress={() => { }} />
         </Appbar.Header>
-
 
         <BottomNavigation
           barStyle={{
@@ -140,7 +142,6 @@ export default function App() {
             // height: 50,
           }}
           renderIcon={({ route, focused, color }) => {
-
             return <Ionicons name={focused ? route.focusedIcon : route.unfocusedIcon} size={24} color={focused ? theme.colors.primaryGreen : color} selectionColor={focused ? theme.colors.primaryGreen : "white"} />;
           }}
           navigationState={{ index, routes }}
